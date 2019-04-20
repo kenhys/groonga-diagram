@@ -44,6 +44,9 @@ module GroongaDiagram
           @data = []
           @columns = []
         end
+        @parser.on_load_columns do |command, columns|
+          @columns = columns
+        end
         @parser.on_load_value do |command, value|
           if value.empty?
             @columns << "_id"
