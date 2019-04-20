@@ -21,16 +21,16 @@ module GroongaDiagram
       @parser.parse(input)
     end
 
+    def select?(command)
+      [
+        "select",
+        "logical_select"
+      ].include?(command.command_name)
+    end
+
     class GrntestExpectedParser < self
       def initialize
         @parser = Groonga::Command::Parser.new
-      end
-
-      def select?(command)
-        [
-          "select",
-          "logical_select"
-        ].include?(command.command_name)
       end
 
       def parse(input)
