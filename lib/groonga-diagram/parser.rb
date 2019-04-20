@@ -45,6 +45,10 @@ module GroongaDiagram
           @columns = []
         end
         @parser.on_load_value do |command, value|
+          if value.empty?
+            @columns << "_id"
+            next
+          end
           value.keys.each do |column|
             unless @columns.include?(column)
               @columns << column
@@ -74,7 +78,12 @@ module GroongaDiagram
         in_load = false
         response = ""
         input.each_line do |line|
-          if line =~ /\A\[\[/
+          if line =~ /\A\[\[.+\]\]/
+            parsed = parse_response(line)
+            table = TTY::Table.new header: parsed[:header], rows: parsed[:rows]
+            renderer = TTY::Table::Renderer::Unicode.new(table)
+            puts renderer.render
+          elsif line =~ /\A\[\[/
           elsif line =~ /\Aload/
             in_load = true
             @parser << line
