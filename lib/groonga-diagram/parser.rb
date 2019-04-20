@@ -141,9 +141,11 @@ module GroongaDiagram
 
       def parse(input)
         @parser.on_command do |command|
-          formatter = Groonga::Command::Format::Command.new(command.command_name,
-                                                            command.arguments)
-          puts formatter.command_line({:pretty_print => true})
+          if select?(command)
+            formatter = Groonga::Command::Format::Command.new(command.command_name,
+                                                              command.arguments)
+            puts formatter.command_line({:pretty_print => true})
+          end
         end
         @parser.on_load_start do |command|
           @data = []
