@@ -1,5 +1,6 @@
 require "groonga/command/parser"
 require "tty-table"
+require "json"
 
 module GroongaDiagram
   class Parser
@@ -79,7 +80,10 @@ module GroongaDiagram
           elsif line =~ /\A\]/
             if in_response
               response << "]"
-              puts response
+              parsed = parse_response(response)
+              table = TTY::Table.new header: parsed[:header], rows: parsed[:rows]
+              renderer = TTY::Table::Renderer::Unicode.new(table)
+              puts renderer.render
             end
             if in_load
               @parser << line
@@ -95,6 +99,27 @@ module GroongaDiagram
           end
         end
         @parser.finish
+      end
+
+      def parse_response(response)
+        headers = []
+        rows = []
+        json = JSON.parse(response)
+        array = json[1][0]
+        array.each do |entry|
+          if entry.size == 1
+          elsif entry[0].kind_of?(Array)
+            entry.each do |column|
+              headers << column[0]
+            end
+          else
+            rows << entry
+          end
+        end
+        {
+          :header => headers,
+          :rows => rows
+        }
       end
     end
 
