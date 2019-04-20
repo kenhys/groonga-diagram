@@ -1,12 +1,12 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "groonga/diagram/version"
+require "groonga-diagram/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "groonga-diagram"
   spec.license       = "LGPLv2.1+"
-  spec.version       = Groonga::Diagram::VERSION
+  spec.version       = GroongaDiagram::VERSION
   spec.authors       = ["Kentaro Hayashi"]
   spec.email         = ["kenhys@gmail.com"]
 
