@@ -1,6 +1,8 @@
 require "bundler/gem_tasks"
-require "rspec/core/rake_task"
 
-RSpec::Core::RakeTask.new(:spec)
+task :default => :test
 
-task :default => :spec
+desc 'Execute test-unit testcases'
+task :test do
+  ruby("test/run-test.rb")
+end
