@@ -40,4 +40,4 @@ Everyone interacting in the Groonga::Diagram project’s codebases, issue tracke
 
 ## Copyright
 
-Copyright (c) 2019 Kentaro Hayashi. See [MIT License](LICENSE.txt) for further details.
+Copyright (c) 2019 Kentaro Hayashi. See [LGPLv2.1 License](LICENSE) for further details.

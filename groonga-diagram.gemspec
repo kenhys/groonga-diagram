@@ -5,7 +5,7 @@ require "groonga/diagram/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "groonga-diagram"
-  spec.license       = "MIT"
+  spec.license       = "LGPLv2.1+"
   spec.version       = Groonga::Diagram::VERSION
   spec.authors       = ["Kentaro Hayashi"]
   spec.email         = ["kenhys@gmail.com"]
