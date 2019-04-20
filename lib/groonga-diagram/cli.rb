@@ -26,7 +26,7 @@ module GroongaDiagram
           invoke :help, ['parse']
         else
           require_relative 'commands/parse'
-          Groonga::Diagram::Commands::Parse.new(format, options).execute
+          GroongaDiagram::Commands::Parse.new(format, options).execute
         end
       end
   end

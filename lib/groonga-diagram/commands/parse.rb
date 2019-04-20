@@ -4,7 +4,7 @@ require_relative '../command'
 
 module GroongaDiagram
   module Commands
-    class Parse < Groonga::Diagram::Command
+    class Parse < GroongaDiagram::Command
       def initialize(format, options)
         @format = format
         @options = options
