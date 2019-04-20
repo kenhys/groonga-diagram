@@ -52,12 +52,24 @@ module GroongaDiagram
             @columns << "_id"
             next
           end
-          value.keys.each do |column|
-            unless @columns.include?(column)
-              @columns << column
+          if value.kind_of?(Array)
+            row = {}
+            @columns.each_with_index do |column, index|
+              if value[index].size > 32
+                row[column] = value[index][0, 32] + "..."
+              else
+                row[column] = value[index]
+              end
             end
+            @data << row
+          else
+            value.keys.each do |column|
+              unless @columns.include?(column)
+                @columns << column
+              end
+            end
+            @data << value
           end
-          @data << value
         end
         @parser.on_load_complete do |command|
           puts command.arguments[:table]
@@ -133,7 +145,15 @@ module GroongaDiagram
               headers << column[0]
             end
           else
-            rows << entry
+            row = []
+            entry.each do |column|
+              if column.size > 32
+                row << column[0, 32] + "..."
+              else
+                row << column
+              end
+            end
+            rows << row
           end
         end
         {
