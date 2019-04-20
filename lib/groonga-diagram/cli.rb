@@ -18,15 +18,15 @@ module GroongaDiagram
     end
     map %w(--version -v) => :version
 
-      desc 'parse [FORMAT]', 'Command description...'
+      desc 'parse FILES', 'Command description...'
       method_option :help, aliases: '-h', type: :boolean,
                            desc: 'Display usage information'
-      def parse(format = nil)
+      def parse(*files)
         if options[:help]
           invoke :help, ['parse']
         else
           require_relative 'commands/parse'
-          GroongaDiagram::Commands::Parse.new(format, options).execute
+          GroongaDiagram::Commands::Parse.new(files, options).execute
         end
       end
   end

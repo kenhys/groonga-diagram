@@ -5,14 +5,14 @@ require_relative '../command'
 module GroongaDiagram
   module Commands
     class Parse < GroongaDiagram::Command
-      def initialize(format, options)
-        @format = format
+      def initialize(files, options)
+        @files = files
         @options = options
       end
 
       def execute(input: $stdin, output: $stdout)
         # Command logic goes here ...
-        output.puts "OK"
+        p @files
       end
     end
   end
