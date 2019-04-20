@@ -1,4 +1,5 @@
 require "groonga/command/parser"
+require "groonga/command/format/command"
 require "tty-table"
 require "json"
 
@@ -25,9 +26,19 @@ module GroongaDiagram
         @parser = Groonga::Command::Parser.new
       end
 
+      def select?(command)
+        [
+          "select",
+          "logical_select"
+        ].include?(command.command_name)
+      end
+
       def parse(input)
         @parser.on_command do |command|
-          #p command
+          if select?(command)
+            formatter = Groonga::Command::Format::Command.new(command.command_name, command.arguments)
+            puts formatter.command_line({:pretty_print => true})
+          end
         end
         @parser.on_load_start do |command|
           @data = []
@@ -154,7 +165,7 @@ module GroongaDiagram
             row = []
             @columns.each do |column|
               if data.has_key?(column)
-                row << data[column]
+                row << data[column].to_s
               else
                 row << "-"
               end
