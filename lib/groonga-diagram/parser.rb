@@ -176,8 +176,27 @@ module GroongaDiagram
           renderer = TTY::Table::Renderer::Unicode.new(table)
           puts renderer.render
         end
+        continuous_line = false
+        buffer = ""
         input.each_line do |line|
-          @parser << line
+          if line =~ /\\\n$/
+            if continuous_line
+              strip_line = line.sub(/\\\n$/, '')
+              buffer << strip_line
+            else
+              strip_line = line.sub(/\\\n$/, '')
+              buffer = strip_line
+              continuous_line = true
+            end
+          else
+            if continuous_line
+              buffer << line
+              @parser << buffer
+              continuous_line = false
+            else
+              @parser << line
+            end
+          end
         end
         @parser.finish
       end
