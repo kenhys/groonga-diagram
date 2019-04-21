@@ -149,7 +149,7 @@ module GroongaDiagram
           else
             row = []
             entry.each do |column|
-              if column.size > 32
+              if column.kind_of?(String) and column.size > 32
                 row << column[0, 32] + "..."
               else
                 row << column
