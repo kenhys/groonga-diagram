@@ -14,15 +14,17 @@ class GroongaDiagram::Commands::ParseTest < Test::Unit::TestCase
     assert_equal "OK\n", output.string
   end
 
-  class GrntestParserTest < self
+end
 
-    def test_load_table
-      path = fixture_path(["load.test"])
-      open(path) do |file|
-        output = StringIO.new
-        parser = GroongaDiagram::Parser::GrntestParser.new({:output => output})
-        parser.parse(file.read)
-        expected = <<-OUTPUT
+class GrntestParserTest < Test::Unit::TestCase
+
+  def test_load_table
+    path = fixture_path(["load.test"])
+    open(path) do |file|
+      output = StringIO.new
+      parser = GroongaDiagram::Parser::GrntestParser.new({:output => output})
+      parser.parse(file.read)
+      expected = <<-OUTPUT
 Site
 ┌───────────────────┬───────────┐
 │_key               │title      │
@@ -30,38 +32,38 @@ Site
 │http://example.org/│example org│
 └───────────────────┴───────────┘
         OUTPUT
-        assert_equal(expected, output.string)
-      end
+      assert_equal(expected, output.string)
+    end
+  end
+end
+
+class GrntestExpectedParserTest < Test::Unit::TestCase
+
+  def test_load
+    path = fixture_path(["load.expected"])
+    open(path) do |file|
+      output = StringIO.new
+      parser = GroongaDiagram::Parser::GrntestExpectedParser.new({:output => output})
+      parser.parse(file.read)
+      expected = <<-OUTPUT
+Site
+┌───────────────────┬───────────┐
+│_key               │title      │
+├───────────────────┼───────────┤
+│http://example.org/│example org│
+└───────────────────┴───────────┘
+        OUTPUT
+      assert_equal(expected, output.string)
     end
   end
 
-  class GrntestExpectedParserTest < self
-
-    def test_load
-      path = fixture_path(["load.expected"])
-      open(path) do |file|
-        output = StringIO.new
-        parser = GroongaDiagram::Parser::GrntestExpectedParser.new({:output => output})
-        parser.parse(file.read)
-        expected = <<-OUTPUT
-Site
-┌───────────────────┬───────────┐
-│_key               │title      │
-├───────────────────┼───────────┤
-│http://example.org/│example org│
-└───────────────────┴───────────┘
-        OUTPUT
-        assert_equal(expected, output.string)
-      end
-    end
-
-    def test_load_vector
-      path = fixture_path(["load_vector.expected"])
-      open(path) do |file|
-        output = StringIO.new
-        parser = GroongaDiagram::Parser::GrntestExpectedParser.new({:output => output})
-        parser.parse(file.read)
-        expected = <<-OUTPUT
+  def test_load_vector
+    path = fixture_path(["load_vector.expected"])
+    open(path) do |file|
+      output = StringIO.new
+      parser = GroongaDiagram::Parser::GrntestExpectedParser.new({:output => output})
+      parser.parse(file.read)
+      expected = <<-OUTPUT
 Memos
 ┌───────────────┬────────────────────────────────────┐
 │_key           │tags                                │
@@ -69,8 +71,7 @@ Memos
 │Groonga is fast│[{\"groonga\"=>100}, {\"mroonga\"=>200}]│
 └───────────────┴────────────────────────────────────┘
         OUTPUT
-        assert_equal(expected, output.string)
-      end
+      assert_equal(expected, output.string)
     end
   end
 end
