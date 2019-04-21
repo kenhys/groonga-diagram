@@ -11,7 +11,7 @@ class GroongaDiagram::Commands::ParseTest < Test::Unit::TestCase
 
     command.execute(output: output)
 
-    assert_equal "OK\n", output.string
+    assert_equal("OK\n", output.string)
   end
 
 end
