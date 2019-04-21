@@ -35,6 +35,23 @@ Site
       assert_equal(expected, output.string)
     end
   end
+
+  def test_continuous_line
+    path = fixture_path(["continuous_line.test"])
+    open(path) do |file|
+      output = StringIO.new
+      parser = GroongaDiagram::Parser::GrntestParser.new({:output => output})
+      parser.parse(file.read)
+      expected = <<-OUTPUT
+logical_select \\
+  --logical_table \"Logs\" \\
+  --shard_key \"timestamp\" \\
+  --sort_keys \"timestamp\"
+      OUTPUT
+      assert_equal(expected, output.string)
+    end
+  end
+
 end
 
 class GrntestExpectedParserTest < Test::Unit::TestCase

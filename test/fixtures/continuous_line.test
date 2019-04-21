@@ -1,0 +1,2 @@
+logical_select Logs timestamp \
+  --sort_keys timestamp
