@@ -1,0 +1,4 @@
+load --table Site
+[
+{"_key":"http://example.org/", "title":"example org"}
+]
