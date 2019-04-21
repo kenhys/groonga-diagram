@@ -38,6 +38,24 @@ Site
 
   class GrntestExpectedParserTest < self
 
+    def test_load
+      path = fixture_path(["load.expected"])
+      open(path) do |file|
+        output = StringIO.new
+        parser = GroongaDiagram::Parser::GrntestExpectedParser.new({:output => output})
+        parser.parse(file.read)
+        expected = <<-OUTPUT
+Site
+┌───────────────────┬───────────┐
+│_key               │title      │
+├───────────────────┼───────────┤
+│http://example.org/│example org│
+└───────────────────┴───────────┘
+        OUTPUT
+        assert_equal(expected, output.string)
+      end
+    end
+
     def test_load_vector
       path = fixture_path(["load_vector.expected"])
       open(path) do |file|
