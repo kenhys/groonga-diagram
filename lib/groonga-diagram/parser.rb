@@ -10,9 +10,9 @@ module GroongaDiagram
       @output = options[:output] || $stdout
       case @options[:format]
       when "test"
-        @parser = GrntestParser.new
+        @parser = GrntestParser.new({:output => @output})
       when "expected"
-        @parser = GrntestExpectedParser.new
+        @parser = GrntestExpectedParser.new({:output => @output})
       else
         raise StandardError
       end
@@ -30,8 +30,9 @@ module GroongaDiagram
     end
 
     class GrntestExpectedParser < self
-      def initialize
+      def initialize(options={})
         @parser = Groonga::Command::Parser.new
+        @output = options[:output] || $stdout
       end
 
       def parse(input)
@@ -165,8 +166,9 @@ module GroongaDiagram
     end
 
     class GrntestParser < self
-      def initialize
+      def initialize(options={})
         @parser = Groonga::Command::Parser.new
+        @output = options[:output] || $stdout
       end
 
       def parse(input)
