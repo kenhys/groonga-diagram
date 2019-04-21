@@ -7,6 +7,7 @@ module GroongaDiagram
   class Parser
     def initialize(options={})
       @options = options
+      @output = options[:output] || $stdout
       case @options[:format]
       when "test"
         @parser = GrntestParser.new
@@ -37,7 +38,7 @@ module GroongaDiagram
         @parser.on_command do |command|
           if select?(command)
             formatter = Groonga::Command::Format::Command.new(command.command_name, command.arguments)
-            puts formatter.command_line({:pretty_print => true})
+            @output.puts(formatter.command_line({:pretty_print => true}))
           end
         end
         @parser.on_load_start do |command|
@@ -72,7 +73,7 @@ module GroongaDiagram
           end
         end
         @parser.on_load_complete do |command|
-          puts command.arguments[:table]
+          @output.puts(command.arguments[:table])
           rows = []
           @data.each do |data|
             row = []
@@ -87,7 +88,7 @@ module GroongaDiagram
           end
           table = TTY::Table.new header: @columns, rows: rows
           renderer = TTY::Table::Renderer::Unicode.new(table)
-          puts renderer.render
+          @output.puts(renderer.render)
         end
         in_response = false
         in_load = false
@@ -97,7 +98,7 @@ module GroongaDiagram
             parsed = parse_response(line)
             table = TTY::Table.new header: parsed[:header], rows: parsed[:rows]
             renderer = TTY::Table::Renderer::Unicode.new(table)
-            puts renderer.render
+            @output.puts(renderer.render)
           elsif line =~ /\A\[\[/
           elsif line =~ /\Aload/
             in_load = true
@@ -115,7 +116,7 @@ module GroongaDiagram
               parsed = parse_response(response)
               table = TTY::Table.new header: parsed[:header], rows: parsed[:rows]
               renderer = TTY::Table::Renderer::Unicode.new(table)
-              puts renderer.render
+              @output.puts(renderer.render)
             end
             if in_load
               @parser << line
@@ -173,7 +174,7 @@ module GroongaDiagram
           if select?(command)
             formatter = Groonga::Command::Format::Command.new(command.command_name,
                                                               command.arguments)
-            puts formatter.command_line({:pretty_print => true})
+            @output.puts(formatter.command_line({:pretty_print => true}))
           end
         end
         @parser.on_load_start do |command|
@@ -192,7 +193,7 @@ module GroongaDiagram
           @data << value
         end
         @parser.on_load_complete do |command|
-          puts command.arguments[:table]
+          @output.puts(command.arguments[:table])
           rows = []
           @data.each do |data|
             row = []
@@ -207,7 +208,7 @@ module GroongaDiagram
           end
           table = TTY::Table.new header: @columns, rows: rows
           renderer = TTY::Table::Renderer::Unicode.new(table)
-          puts renderer.render
+          @output.puts(renderer.render)
         end
         continuous_line = false
         buffer = ""
