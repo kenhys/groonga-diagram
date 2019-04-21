@@ -91,4 +91,27 @@ Memos
       assert_equal(expected, output.string)
     end
   end
+
+    def test_logical_select
+    path = fixture_path(["logical_select.expected"])
+    open(path) do |file|
+      output = StringIO.new
+      parser = GroongaDiagram::Parser::GrntestExpectedParser.new({:output => output})
+      parser.parse(file.read)
+      expected = <<-OUTPUT
+logical_select \\
+  --logical_table \"Logs\" \\
+  --shard_key \"timestamp\" \\
+  --sort_keys \"timestamp\"
+┌───┬───────────────────┬────────────┐
+│_id│memo               │timestamp   │
+├───┼───────────────────┼────────────┤
+│2  │2015-02-03 12:49:00│1422935340.0│
+│1  │2015-02-03 23:59:59│1422975599.0│
+│1  │2015-02-04 00:00:00│1422975600.0│
+└───┴───────────────────┴────────────┘
+      OUTPUT
+      assert_equal(expected, output.string)
+    end
+  end
 end
