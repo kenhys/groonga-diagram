@@ -37,5 +37,23 @@ Site
   end
 
   class GrntestExpectedParserTest < self
+
+    def test_load_vector
+      path = fixture_path(["load_vector.expected"])
+      open(path) do |file|
+        output = StringIO.new
+        parser = GroongaDiagram::Parser::GrntestExpectedParser.new({:output => output})
+        parser.parse(file.read)
+        expected = <<-OUTPUT
+Memos
+┌───────────────┬────────────────────────────────────┐
+│_key           │tags                                │
+├───────────────┼────────────────────────────────────┤
+│Groonga is fast│[{\"groonga\"=>100}, {\"mroonga\"=>200}]│
+└───────────────┴────────────────────────────────────┘
+        OUTPUT
+        assert_equal(expected, output.string)
+      end
+    end
   end
 end
