@@ -181,9 +181,6 @@ module GroongaDiagram
           @data = []
           @columns = []
         end
-        @parser.on_load_columns do |command, columns|
-          p columns
-        end
         @parser.on_load_value do |command, value|
           value.keys.each do |column|
             unless @columns.include?(column)
