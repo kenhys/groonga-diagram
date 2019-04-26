@@ -14,7 +14,7 @@ module GroongaDiagram
         @parser.on_command do |command|
           if select?(command)
             formatter = Groonga::Command::Format::Command.new(command.command_name, command.arguments)
-            @output.puts(formatter.command_line({ pretty_print: true }))
+            @output.puts(formatter.command_line(pretty_print: true))
           end
         end
         @parser.on_load_start do
