@@ -1,9 +1,9 @@
 # coding: utf-8
+
 require 'test_helper'
 require 'groonga-diagram/parser'
 
 class GrntestParserTest < Test::Unit::TestCase
-
   def test_load_table
     path = fixture_path(["load.test"])
     File.open(path) do |file|
@@ -37,11 +37,9 @@ logical_select \\
       assert_equal(expected, output.string)
     end
   end
-
 end
 
 class GrntestExpectedParserTest < Test::Unit::TestCase
-
   def test_load
     path = fixture_path(["load.expected"])
     File.open(path) do |file|
