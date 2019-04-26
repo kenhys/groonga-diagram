@@ -29,7 +29,7 @@ module GroongaDiagram
 
         paths = parser.parse!(command_line)
         paths.each do |path|
-          open(path) do |file|
+          File.open(path) do |file|
             case @options[:format]
             when "test"
               @parser = GrntestParser.new(output: @output)
