@@ -1,20 +1,14 @@
 require 'test_helper'
 require 'groonga-diagram/command/parser'
-require 'groonga-diagram/parser'
 
-class GroongaDiagram::Command::ParseTest < Test::Unit::TestCase
-  def test_executes_groonga_diagram_help_parse_command_successfully
-    output = `groonga-diagram help parse`
-    expected_output = <<-OUT
-Usage:
-  groonga-diagram parse FILES
-
-Options:
-  -h, [--help], [--no-help]  # Display usage information
-
-Command description...
-    OUT
-
+class CommandTest < Test::Unit::TestCase
+  def test_usage
+    output = `groonga-diagram -h`
+    expected_output = <<-OUTPUT
+Usage: groonga-diagram [options] PATH1 PATH2 ...
+    -f, --format=FORMAT              Parse specified files as FORMAT format
+                                     supported formats: [test, expected] (test)
+    OUTPUT
     assert_equal expected_output, output
   end
 end
