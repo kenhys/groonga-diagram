@@ -78,7 +78,7 @@ Memos
     end
   end
 
-    def test_logical_select
+  def test_logical_select
     path = fixture_path(["logical_select.expected"])
     File.open(path) do |file|
       output = StringIO.new
