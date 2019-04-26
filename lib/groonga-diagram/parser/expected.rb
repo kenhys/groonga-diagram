@@ -96,8 +96,8 @@ module GroongaDiagram
             end
             if in_load
               @parser << line
+              in_load = false
             end
-            in_load = false if in_load
             in_response = false if in_response
           else
             if in_response
