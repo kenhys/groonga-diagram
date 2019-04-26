@@ -1,5 +1,5 @@
 module GroongaDiagram
-  class GrntestExpectedParser < self
+  class GrntestExpectedParser
     def initialize(options={})
       @parser = Groonga::Command::Parser.new
       @output = options[:output] || $stdout
