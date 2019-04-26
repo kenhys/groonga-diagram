@@ -32,9 +32,9 @@ module GroongaDiagram
           open(path) do |file|
             case @options[:format]
             when "test"
-              @parser = ::GroongaDiagram::Parser::GrntestParser.new(output: @output)
+              @parser = GrntestParser.new(output: @output)
             when "expected"
-              @parser = ::GroongaDiagram::Parser::GrntestExpectedParser.new(output: @output)
+              @parser = GrntestExpectedParser.new(output: @output)
             else
               raise StandardError
             end
