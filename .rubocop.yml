@@ -1,0 +1,5 @@
+AndOr:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
