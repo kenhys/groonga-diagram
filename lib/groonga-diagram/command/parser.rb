@@ -28,8 +28,6 @@ module GroongaDiagram
         end
 
         paths = parser.parse!(command_line)
-        p paths
-        p @options
         paths.each do |path|
           open(path) do |file|
             case @options[:format]
