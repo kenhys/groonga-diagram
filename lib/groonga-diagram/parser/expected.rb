@@ -54,7 +54,7 @@ module GroongaDiagram
           @data.each do |data|
             row = []
             @columns.each do |column|
-              if data.has_key?(column)
+              if data.key?(column)
                 row << data[column].to_s
               else
                 row << "-"
