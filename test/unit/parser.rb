@@ -6,7 +6,7 @@ class GrntestParserTest < Test::Unit::TestCase
 
   def test_load_table
     path = fixture_path(["load.test"])
-    open(path) do |file|
+    File.open(path) do |file|
       output = StringIO.new
       parser = GroongaDiagram::Parser::GrntestParser.new(output: output)
       parser.parse(file.read)
@@ -24,7 +24,7 @@ Site
 
   def test_continuous_line
     path = fixture_path(["continuous_line.test"])
-    open(path) do |file|
+    File.open(path) do |file|
       output = StringIO.new
       parser = GroongaDiagram::Parser::GrntestParser.new(output: output)
       parser.parse(file.read)
@@ -44,7 +44,7 @@ class GrntestExpectedParserTest < Test::Unit::TestCase
 
   def test_load
     path = fixture_path(["load.expected"])
-    open(path) do |file|
+    File.open(path) do |file|
       output = StringIO.new
       parser = GroongaDiagram::Parser::GrntestExpectedParser.new(output: output)
       parser.parse(file.read)
@@ -62,7 +62,7 @@ Site
 
   def test_load_vector
     path = fixture_path(["load_vector.expected"])
-    open(path) do |file|
+    File.open(path) do |file|
       output = StringIO.new
       parser = GroongaDiagram::Parser::GrntestExpectedParser.new(output: output)
       parser.parse(file.read)
@@ -80,7 +80,7 @@ Memos
 
     def test_logical_select
     path = fixture_path(["logical_select.expected"])
-    open(path) do |file|
+    File.open(path) do |file|
       output = StringIO.new
       parser = GroongaDiagram::Parser::GrntestExpectedParser.new(output: output)
       parser.parse(file.read)
