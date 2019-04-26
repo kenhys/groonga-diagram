@@ -29,7 +29,7 @@ module GroongaDiagram
             @columns << "_id"
             next
           end
-          if value.kind_of?(Array)
+          if value.is_a?(Array)
             row = {}
             @columns.each_with_index do |column, index|
               if value[index].size > 32
@@ -117,14 +117,14 @@ module GroongaDiagram
         array = json[1][0]
         array.each do |entry|
           if entry.size == 1
-          elsif entry[0].kind_of?(Array)
+          elsif entry[0].is_a?(Array)
             entry.each do |column|
               headers << column[0]
             end
           else
             row = []
             entry.each do |column|
-              if column.kind_of?(String) and column.size > 32
+              if column.is_a?(String) and column.size > 32
                 row << column[0, 32] + "..."
               else
                 row << column
