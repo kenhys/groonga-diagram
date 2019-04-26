@@ -41,9 +41,7 @@ module GroongaDiagram
             @data << row
           else
             value.keys.each do |column|
-              unless @columns.include?(column)
-                @columns << column
-              end
+              @columns << column unless @columns.include?(column)
             end
             @data << value
           end
