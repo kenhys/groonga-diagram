@@ -1,6 +1,7 @@
 # coding: utf-8
 require 'test_helper'
 require 'groonga-diagram/commands/parse'
+require 'groonga-diagram/parser'
 
 class GroongaDiagram::Commands::ParseTest < Test::Unit::TestCase
   def test_executes_parse_command_successfully

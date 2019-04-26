@@ -1,5 +1,6 @@
 require 'test_helper'
 require 'groonga-diagram/commands/parse'
+require 'groonga-diagram/parser'
 
 class GroongaDiagram::Commands::ParseTest < Test::Unit::TestCase
   def test_executes_groonga_diagram_help_parse_command_successfully
