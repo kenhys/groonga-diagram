@@ -11,3 +11,6 @@ AndOr:
 
 Style/StringLiterals:
   Enabled: false
+
+Naming/FileName:
+  Enabled: false
