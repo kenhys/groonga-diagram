@@ -16,11 +16,11 @@ module GroongaDiagram
             @output.puts(formatter.command_line(pretty_print: true))
           end
         end
-        @parser.on_load_start do |command|
+        @parser.on_load_start do |_command|
           @data = []
           @columns = []
         end
-        @parser.on_load_value do |command, value|
+        @parser.on_load_value do |_command, value|
           value.keys.each do |column|
             unless @columns.include?(column)
               @columns << column
