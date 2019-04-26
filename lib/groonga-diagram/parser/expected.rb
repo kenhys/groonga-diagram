@@ -1,4 +1,6 @@
 require "groonga-diagram/parser/base"
+require "groonga/command/parser"
+require "tty-table"
 
 module GroongaDiagram
   module Parser
