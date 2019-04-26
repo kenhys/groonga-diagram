@@ -75,18 +75,18 @@ module GroongaDiagram
             table = TTY::Table.new header: parsed[:header], rows: parsed[:rows]
             renderer = TTY::Table::Renderer::Unicode.new(table)
             @output.puts(renderer.render)
-          elsif line =~ /\A\[\[/
-          elsif line =~ /\Aload/
+          elsif line.start_with?("[[")
+          elsif line.start_with?("load")
             in_load = true
             @parser << line
-          elsif line =~ /\A\[/
+          elsif line.start_with?("[")
             if in_load
               @parser << line
             else
               in_response = true
               response = "[\n"
             end
-          elsif line =~ /\A\]/
+          elsif line.start_with?("]")
             if in_response
               response << "]"
               parsed = parse_response(response)
