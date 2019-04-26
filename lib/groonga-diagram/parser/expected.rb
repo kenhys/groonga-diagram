@@ -17,14 +17,14 @@ module GroongaDiagram
             @output.puts(formatter.command_line({ pretty_print: true }))
           end
         end
-        @parser.on_load_start do |command|
+        @parser.on_load_start do
           @data = []
           @columns = []
         end
-        @parser.on_load_columns do |command, columns|
+        @parser.on_load_columns do |_command, columns|
           @columns = columns
         end
-        @parser.on_load_value do |command, value|
+        @parser.on_load_value do |_command, value|
           if value.empty?
             @columns << "_id"
             next
