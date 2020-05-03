@@ -9,7 +9,7 @@ AllCops:
 AndOr:
   Enabled: false
 
-Layout/IndentHeredoc:
+Layout/HeredocIndentation:
   Enabled: false
 
 Layout/SpaceAroundEqualsInParameterDefault:
